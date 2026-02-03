@@ -1,0 +1,692 @@
+<html lang="en" class="scroll-smooth"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Juwel Hossain — Frontend Developer | React, WordPress, GHL</title>
+        <meta name="description"
+            content="I build fast, SEO-friendly websites and funnels using React, WordPress, Tailwind, and GoHighLevel.">
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600&amp;display=swap"
+            rel="stylesheet">
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Iconify -->
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+        <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        black: '#050505',
+                        dark: '#0A0A0A',
+                        panel: '#111111',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+        <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at top center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at top center, black 40%, transparent 100%);
+        }
+
+        .glass-panel {
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Page Transitions */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            min-height: 100vh;
+            padding-top: 80px; /* Offset for fixed header */
+        }
+        
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Nav Link Active State */
+        .nav-link.active {
+            color: white;
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
+    </style>
+    </head>
+    <body class="relative min-h-screen flex flex-col font-sans selection:bg-white selection:text-black">
+
+        <!-- Background Grid -->
+        <div class="fixed inset-0 z-0 bg-grid pointer-events-none"></div>
+
+        <!-- Navigation -->
+        <header class="fixed top-0 w-full z-50 glass-panel">
+            <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" onclick="route(event, 'home')"
+                    class="text-lg font-display font-semibold tracking-tighter uppercase z-50 transition-colors hover:text-neutral-400">
+                    Juwel<span class="text-neutral-500">Hossain</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav
+                    class="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-wide text-neutral-500">
+                    <a href="#projects" onclick="route(event, 'projects')"
+                        class="nav-link transition-colors hover:text-white" id="nav-projects">Projects</a>
+                    <a href="#services" onclick="route(event, 'services')"
+                        class="nav-link transition-colors hover:text-white" id="nav-services">Services</a>
+                    <a href="#about" onclick="route(event, 'about')" class="nav-link transition-colors hover:text-white"
+                        id="nav-about">About</a>
+                    <a href="#blog" onclick="route(event, 'blog')" class="nav-link transition-colors hover:text-white"
+                        id="nav-blog">Blog</a>
+                </nav>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <a href="#contact" onclick="route(event, 'contact')"
+                        class="hidden md:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold tracking-wide uppercase transition-colors bg-white text-black hover:bg-neutral-200">
+                        Book Call
+                    </a>
+                    <button class="md:hidden text-white" aria-label="Menu">
+                        <iconify-icon icon="solar:hamburger-menu-linear" width="24"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==========================================
+         PAGE: HOME
+    =========================================== -->
+        <main id="home" class="page-content active relative z-10">
+            <!-- Hero -->
+            <section class="max-w-4xl mx-auto px-6 py-24 md:py-32 flex flex-col items-start justify-center">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border backdrop-blur text-xs tracking-wide animate-fade-in border-white/10 bg-white/5 text-neutral-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                    Available for new projects
+                </div>
+
+                <h1
+                    class="font-display font-medium text-5xl md:text-7xl leading-tight tracking-tight mb-6 animate-slide-up text-balance text-white">
+                    Frontend Developer building <span class="text-neutral-500">high-performance</span> digital
+                    experiences.
+                </h1>
+
+                <p
+                    class="text-lg md:text-xl max-w-2xl mb-10 leading-relaxed animate-slide-up text-balance text-neutral-400 delay-100">
+                    Specializing in React.js, WordPress, and GoHighLevel. I help businesses turn visitors into customers
+                    with clean code and conversion-focused design.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-slide-up delay-200">
+                    <a href="#projects" onclick="route(event, 'projects')"
+                        class="inline-flex items-center justify-center px-6 py-3 text-xs font-semibold uppercase tracking-wide transition-all bg-white text-black hover:bg-neutral-200">
+                        View Work
+                    </a>
+                    <a href="#services" onclick="route(event, 'services')"
+                        class="inline-flex items-center justify-center px-6 py-3 text-xs font-semibold uppercase tracking-wide border transition-all border-white/20 text-white hover:bg-white/5">
+                        My Services
+                    </a>
+                </div>
+            </section>
+
+            <!-- Brief Features -->
+            <section class="border-y border-white/5 bg-neutral-900/20">
+                <div
+                    class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5">
+                    <div class="p-8 hover:bg-white/5 transition-colors cursor-default">
+                        <iconify-icon icon="solar:laptop-minimalistic-linear" class="text-white mb-4"
+                            width="24"></iconify-icon>
+                        <h3 class="font-display font-medium text-lg mb-2">Clean Code</h3>
+                        <p class="text-sm text-neutral-400">Built with modern standards using React &amp; Tailwind for
+                            speed.</p>
+                    </div>
+                    <div class="p-8 hover:bg-white/5 transition-colors cursor-default">
+                        <iconify-icon icon="solar:graph-new-up-linear" class="text-white mb-4"
+                            width="24"></iconify-icon>
+                        <h3 class="font-display font-medium text-lg mb-2">SEO Optimized</h3>
+                        <p class="text-sm text-neutral-400">Semantic HTML and performance tweaks for better ranking.</p>
+                    </div>
+                    <div class="p-8 hover:bg-white/5 transition-colors cursor-default">
+                        <iconify-icon icon="solar:users-group-rounded-linear" class="text-white mb-4"
+                            width="24"></iconify-icon>
+                        <h3 class="font-display font-medium text-lg mb-2">User Focused</h3>
+                        <p class="text-sm text-neutral-400">Interfaces designed to convert traffic into qualified
+                            leads.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Selected Work Teaser -->
+            <section class="py-24 max-w-6xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-12">
+                    <h2 class="text-3xl font-display font-medium tracking-tight">Selected Work</h2>
+                    <a href="#projects" onclick="route(event, 'projects')"
+                        class="text-xs uppercase tracking-wide border-b border-white/30 pb-1 hover:border-white transition-colors">View
+                        All</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project Card -->
+                    <div onclick="route(event, 'projects')" class="group cursor-pointer">
+                        <div class="aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden mb-4">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-50 group-hover:opacity-100 transition-opacity">
+                                <iconify-icon icon="solar:medical-kit-linear" width="48"
+                                    class="text-neutral-600 group-hover:text-white transition-colors"></iconify-icon>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-medium">Medizone App</h3>
+                        <p class="text-sm text-neutral-500">React • Tailwind • Healthcare</p>
+                    </div>
+                    <!-- Project Card -->
+                    <div onclick="route(event, 'projects')" class="group cursor-pointer">
+                        <div class="aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden mb-4">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center opacity-50 group-hover:opacity-100 transition-opacity">
+                                <iconify-icon icon="solar:shop-linear" width="48"
+                                    class="text-neutral-600 group-hover:text-white transition-colors"></iconify-icon>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-medium">E-Commerce Store</h3>
+                        <p class="text-sm text-neutral-500">Next.js • Stripe • Retail</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==========================================
+         PAGE: PROJECTS
+    =========================================== -->
+        <main id="projects" class="page-content relative z-10">
+            <section class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+                <div class="max-w-2xl mb-16">
+                    <h1 class="text-4xl md:text-5xl font-display font-medium tracking-tight mb-6">Recent Projects</h1>
+                    <p class="text-lg text-neutral-400">A selection of web applications, marketing sites, and funnels
+                        built for performance and conversion.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-12">
+                    <!-- Project 1 -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 border-t border-white/10 pt-12">
+                        <div class="order-2 md:order-1 flex flex-col justify-center">
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">React</span>
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">Healthcare</span>
+                            </div>
+                            <h2 class="text-2xl font-display font-medium mb-3">Medizone Healthcare Platform</h2>
+                            <p class="text-neutral-400 mb-6 leading-relaxed text-sm">A comprehensive patient portal
+                                allowing users to book appointments, view medical history, and consult doctors online.
+                                Built with a focus on accessibility and data privacy.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-xs font-semibold uppercase tracking-wide hover:text-neutral-300">
+                                View Case Study <iconify-icon icon="solar:arrow-right-linear"
+                                    class="ml-2"></iconify-icon>
+                            </a>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 aspect-[4/3] bg-neutral-900 border border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors">
+                            <iconify-icon icon="solar:monitor-smartphone-linear" width="64"
+                                class="text-neutral-700 group-hover:text-white transition-colors"></iconify-icon>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 border-t border-white/10 pt-12">
+                        <div class="order-2 md:order-1 flex flex-col justify-center">
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">Next.js</span>
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">E-Sports</span>
+                            </div>
+                            <h2 class="text-2xl font-display font-medium mb-3">Tournament Bracket Engine</h2>
+                            <p class="text-neutral-400 mb-6 leading-relaxed text-sm">Real-time tournament tracking
+                                system for an e-sports organization. Features live score updates via WebSockets and an
+                                interactive bracket visualization.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-xs font-semibold uppercase tracking-wide hover:text-neutral-300">
+                                View Live <iconify-icon icon="solar:arrow-right-up-linear" class="ml-2"></iconify-icon>
+                            </a>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 aspect-[4/3] bg-neutral-900 border border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors">
+                            <iconify-icon icon="solar:gamepad-linear" width="64"
+                                class="text-neutral-700 group-hover:text-white transition-colors"></iconify-icon>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 border-t border-white/10 pt-12">
+                        <div class="order-2 md:order-1 flex flex-col justify-center">
+                            <div class="flex gap-2 mb-4">
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">WordPress</span>
+                                <span
+                                    class="px-2 py-1 text-[10px] uppercase tracking-wider border border-white/10 text-neutral-400">Elementor</span>
+                            </div>
+                            <h2 class="text-2xl font-display font-medium mb-3">Photography Portfolio &amp; Blog</h2>
+                            <p class="text-neutral-400 mb-6 leading-relaxed text-sm">A highly optimized WordPress site
+                                using Elementor Pro. Custom post types for galleries and an integrated booking system
+                                for photo sessions.</p>
+                            <a href="#"
+                                class="inline-flex items-center text-xs font-semibold uppercase tracking-wide hover:text-neutral-300">
+                                View Live <iconify-icon icon="solar:arrow-right-up-linear" class="ml-2"></iconify-icon>
+                            </a>
+                        </div>
+                        <div
+                            class="order-1 md:order-2 aspect-[4/3] bg-neutral-900 border border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors">
+                            <iconify-icon icon="solar:camera-linear" width="64"
+                                class="text-neutral-700 group-hover:text-white transition-colors"></iconify-icon>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==========================================
+         PAGE: SERVICES
+    =========================================== -->
+        <main id="services" class="page-content relative z-10">
+            <section class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+                <div class="max-w-2xl mb-16">
+                    <h1 class="text-4xl md:text-5xl font-display font-medium tracking-tight mb-6">Services</h1>
+                    <p class="text-lg text-neutral-400">I bridge the gap between design and functionality. Here is how I
+                        can help your business grow.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Service 1 -->
+                    <div class="p-8 border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-colors">
+                        <iconify-icon icon="solar:code-circle-linear" class="text-white mb-6" width="32"></iconify-icon>
+                        <h3 class="text-xl font-display font-medium mb-3">Frontend Development</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                            I build responsive, fast-loading interfaces using <strong>React.js</strong> and
+                            <strong>Tailwind CSS</strong>. Your users get a seamless app-like experience, and you get
+                            clean, maintainable code.
+                        </p>
+                        <ul class="space-y-2 text-xs text-neutral-500">
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Single Page Apps (SPA)</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Interactive Dashboards</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Component Systems</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="p-8 border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-colors">
+                        <iconify-icon icon="solar:wordpress-linear" class="text-white mb-6" width="32"></iconify-icon>
+                        <h3 class="text-xl font-display font-medium mb-3">WordPress Solutions</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                            Custom themes and Elementor builds that don't bloat your site. I ensure your WordPress site
+                            is secure, easy to edit, and ranks well on Google.
+                        </p>
+                        <ul class="space-y-2 text-xs text-neutral-500">
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Custom Theme Development</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Elementor Pro Optimization</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> WooCommerce Setup</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="p-8 border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-colors">
+                        <iconify-icon icon="solar:funnel-linear" class="text-white mb-6" width="32"></iconify-icon>
+                        <h3 class="text-xl font-display font-medium mb-3">GoHighLevel Funnels</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                            End-to-end CRM and funnel setup. I design high-converting landing pages and automate your
+                            follow-up sequences so no lead falls through the cracks.
+                        </p>
+                        <ul class="space-y-2 text-xs text-neutral-500">
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Landing Page Design</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Workflow Automation</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Calendar Integration</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="p-8 border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-colors">
+                        <iconify-icon icon="solar:ranking-linear" class="text-white mb-6" width="32"></iconify-icon>
+                        <h3 class="text-xl font-display font-medium mb-3">Technical SEO</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                            A beautiful site is useless if no one finds it. I optimize site structure, load speeds (Core
+                            Web Vitals), and schema markup to improve visibility.
+                        </p>
+                        <ul class="space-y-2 text-xs text-neutral-500">
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> PageSpeed Optimization</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Schema &amp; Meta Tags</li>
+                            <li class="flex items-center gap-2"><iconify-icon
+                                    icon="solar:check-circle-linear"></iconify-icon> Accessibility Audits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-16 p-8 border border-white/10 bg-neutral-900/50 text-center">
+                    <h3 class="text-lg font-medium mb-4">Not sure what you need?</h3>
+                    <a href="#contact" onclick="route(event, 'contact')"
+                        class="inline-flex items-center justify-center px-6 py-3 text-xs font-semibold uppercase tracking-wide bg-white text-black hover:bg-neutral-200">
+                        Book a Free Consultation
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==========================================
+         PAGE: ABOUT
+    =========================================== -->
+        <main id="about" class="page-content relative z-10">
+            <section class="max-w-4xl mx-auto px-6 py-12 md:py-20">
+                <h1 class="text-4xl md:text-5xl font-display font-medium tracking-tight mb-8">About Me</h1>
+
+                <div class="flex flex-col md:flex-row gap-12 mb-16">
+                    <!-- User Profile Image -->
+                    <div class="md:w-1/3">
+                        <div
+                            class="aspect-square bg-neutral-900 border border-white/10 relative overflow-hidden mb-6 group">
+                            <!-- Using attached profile image file 'profile.jpg' (place the attached image at d:\\Movies\\profile.jpg) -->
+                            <img src="profile.jpg" alt="Juwel Hossain" loading="lazy" decoding="async"
+                                fetchpriority="low"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <!-- Subtle inner border for polish -->
+                            <div class="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 text-[10px] border border-white/10 text-neutral-400">Bangladesh
+                                based</span>
+                            <span class="px-2 py-1 text-[10px] border border-white/10 text-neutral-400">Remote
+                                Worker</span>
+                        </div>
+                    </div>
+
+                    <div class="md:w-2/3 space-y-6 text-neutral-400 leading-relaxed text-sm md:text-base">
+                        <p class="text-white text-lg font-medium">I'm Juwel Hossain, a Frontend Developer who cares
+                            about the details.</p>
+                        <p>
+                            I started my journey exploring how the web works, which quickly turned into a passion for
+                            building it. Over the years, I've honed my skills in the React ecosystem and CMS platforms
+                            like WordPress to deliver solutions that aren't just code—they are business assets.
+                        </p>
+                        <p>
+                            My philosophy is simple: <strong>Make it fast, make it accessible, and make it
+                                convert.</strong> Whether it's a complex dashboard or a marketing funnel, the end user's
+                            experience is my top priority.
+                        </p>
+                        <p>
+                            When I'm not coding, I'm likely researching the latest SEO trends or optimizing workflows in
+                            GoHighLevel to help clients automate their busy work.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-display font-medium mb-6">Tech Stack</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+                    <div class="p-4 border border-white/10 bg-white/[0.02]">
+                        <div class="text-xs text-neutral-500 mb-1">Core</div>
+                        <div class="font-medium">HTML5, CSS3, JS</div>
+                    </div>
+                    <div class="p-4 border border-white/10 bg-white/[0.02]">
+                        <div class="text-xs text-neutral-500 mb-1">Frameworks</div>
+                        <div class="font-medium">React, Next.js</div>
+                    </div>
+                    <div class="p-4 border border-white/10 bg-white/[0.02]">
+                        <div class="text-xs text-neutral-500 mb-1">Styling</div>
+                        <div class="font-medium">Tailwind CSS</div>
+                    </div>
+                    <div class="p-4 border border-white/10 bg-white/[0.02]">
+                        <div class="text-xs text-neutral-500 mb-1">CMS</div>
+                        <div class="font-medium">WordPress, GHL</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==========================================
+         PAGE: BLOG
+    =========================================== -->
+        <main id="blog" class="page-content relative z-10">
+            <section class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+                <div class="max-w-2xl mb-16">
+                    <h1 class="text-4xl md:text-5xl font-display font-medium tracking-tight mb-6">Blog</h1>
+                    <p class="text-lg text-neutral-400">Thoughts on frontend development, performance optimization, and
+                        digital marketing tech.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Post 1 -->
+                    <article class="group cursor-pointer">
+                        <div class="aspect-[16/9] bg-neutral-900 border border-white/10 mb-6 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-neutral-500 mb-3">
+                            <span>Oct 12, 2023</span>
+                            <span class="w-1 h-1 bg-neutral-700 rounded-full"></span>
+                            <span>Development</span>
+                        </div>
+                        <h2
+                            class="text-xl font-display font-medium mb-3 group-hover:underline decoration-1 underline-offset-4">Why
+                            I use Tailwind CSS for every project</h2>
+                        <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3">
+                            Utility-first CSS might look messy in HTML, but the speed of development and consistency it
+                            provides is unmatched in modern web development.
+                        </p>
+                    </article>
+
+                    <!-- Post 2 -->
+                    <article class="group cursor-pointer">
+                        <div class="aspect-[16/9] bg-neutral-900 border border-white/10 mb-6 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-neutral-500 mb-3">
+                            <span>Sep 28, 2023</span>
+                            <span class="w-1 h-1 bg-neutral-700 rounded-full"></span>
+                            <span>SEO</span>
+                        </div>
+                        <h2
+                            class="text-xl font-display font-medium mb-3 group-hover:underline decoration-1 underline-offset-4">Core
+                            Web Vitals: A Guide for React Developers</h2>
+                        <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3">
+                            React apps can suffer from poor SEO if not optimized. Here is how to handle LCP, CLS, and
+                            FID in a single page application environment.
+                        </p>
+                    </article>
+
+                    <!-- Post 3 -->
+                    <article class="group cursor-pointer">
+                        <div class="aspect-[16/9] bg-neutral-900 border border-white/10 mb-6 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-neutral-500 mb-3">
+                            <span>Aug 15, 2023</span>
+                            <span class="w-1 h-1 bg-neutral-700 rounded-full"></span>
+                            <span>Automation</span>
+                        </div>
+                        <h2
+                            class="text-xl font-display font-medium mb-3 group-hover:underline decoration-1 underline-offset-4">GoHighLevel
+                            vs WordPress for Landing Pages</h2>
+                        <p class="text-sm text-neutral-400 leading-relaxed line-clamp-3">
+                            Should you build your funnel in a dedicated CRM or stick to WordPress? A breakdown of pros,
+                            cons, and when to use which.
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==========================================
+         PAGE: CONTACT
+    =========================================== -->
+        <main id="contact" class="page-content relative z-10">
+            <section class="max-w-4xl mx-auto px-6 py-12 md:py-20">
+                <h1 class="text-4xl md:text-5xl font-display font-medium tracking-tight mb-6">Contact</h1>
+                <p class="text-lg text-neutral-400 mb-12">Ready to start a project? Fill out the form below or send an
+                    email to <a href="mailto:contact@juwelhossain.com"
+                        class="text-white hover:underline">contact@juwelhossain.com</a>.</p>
+
+                <form class="space-y-8 bg-neutral-900/30 p-8 border border-white/10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wide text-neutral-500">Name</label>
+                            <input type="text"
+                                class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                                placeholder="John Doe">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wide text-neutral-500">Email</label>
+                            <input type="email"
+                                class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                                placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wide text-neutral-500">Service
+                            Interest</label>
+                        <select
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors [&amp;&gt;option]:text-black">
+                            <option>React Web App</option>
+                            <option>WordPress Website</option>
+                            <option>GoHighLevel Funnel</option>
+                            <option>SEO / Optimization</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wide text-neutral-500">Message</label>
+                        <textarea rows="4"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                            placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit"
+                        class="inline-flex items-center justify-center px-8 py-4 text-xs font-bold uppercase tracking-wide bg-white text-black hover:bg-neutral-200 transition-colors w-full md:w-auto">
+                        Send Message
+                    </button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-12 border-t border-white/10 relative z-20">
+            <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-xs text-neutral-500">
+                    © 2023 Juwel Hossain. All rights reserved.
+                </div>
+                <div class="flex gap-6 text-xs font-medium text-neutral-400">
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Router Logic for SPA -->
+        <script>
+        function route(event, pageId) {
+            if (event) event.preventDefault();
+            
+            // Update Menu Active State
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            const activeLink = document.getElementById('nav-' + pageId);
+            if (activeLink) activeLink.classList.add('active');
+
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.style.opacity = '0';
+                setTimeout(() => {
+                    page.classList.remove('active');
+                }, 400); // Match transition duration
+            });
+
+            // Show target page with delay for fade out
+            setTimeout(() => {
+                const target = document.getElementById(pageId);
+                if (target) {
+                    target.classList.add('active');
+                    // Trigger reflow
+                    void target.offsetWidth; 
+                    target.style.opacity = '1';
+                    window.scrollTo(0, 0);
+                }
+            }, 400);
+
+            // Update URL hash without scroll
+            history.pushState(null, null, `#${pageId}`);
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.substring(1) || 'home';
+            route(null, hash);
+        });
+
+        // Initialize based on URL hash or default to home
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1) || 'home';
+            // Immediate show for initial load
+            const target = document.getElementById(hash);
+            if (target) {
+                target.classList.add('active');
+                target.style.opacity = '1';
+                
+                // Set nav active
+                const activeLink = document.getElementById('nav-' + hash);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        });
+    </script>
+
+    </body></html>
